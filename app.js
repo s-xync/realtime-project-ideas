@@ -3,7 +3,7 @@ const express = require("@feathersjs/express");
 const socketio = require("@feathersjs/socketio");
 const moment = require("moment");
 
-// idea service
+// Idea Service
 class IdeaService {
   constructor() {
     this.ideas = [];
@@ -24,23 +24,25 @@ class IdeaService {
     idea.time = moment().format("h:mm:ss a");
 
     this.ideas.push(idea);
+
+    return idea;
   }
 }
 
 const app = express(feathers());
 
-// parse json
+// Parse JSON
 app.use(express.json());
-// config socket.io
+// Config Socket.io realtime APIs
 app.configure(socketio());
-// enable rest
+// Enable REST services
 app.configure(express.rest());
-// register service
+// Register services
 app.use("/ideas", new IdeaService());
 
-// new connections connect to stream channel
+// New connections connect to stream channel
 app.on("connection", conn => app.channel("stream").join(conn));
-// publish event to stream
+// Publish events to stream
 app.publish(data => app.channel("stream"));
 
 const PORT = process.env.PORT || 3030;
@@ -50,9 +52,3 @@ app
   .on("listening", () =>
     console.log(`Realtime server running on port ${PORT}`)
   );
-
-// app.service("ideas").create({
-//   text: "Build a cool app",
-//   tech: "nodejs",
-//   viewer: "john doe"
-// });
