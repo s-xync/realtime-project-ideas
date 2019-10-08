@@ -2,9 +2,10 @@
   "name": "realtime-project-ideas",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app",
+    "client": "live-server index.html"
   },
   "keywords": [],
   "author": "",
@@ -13,6 +14,7 @@
     "@feathersjs/express": "^4.3.5",
     "@feathersjs/feathers": "^4.3.4",
     "@feathersjs/socketio": "^4.3.5",
+    "live-server": "^1.2.1",
     "moment": "^2.24.0"
   }
 }
